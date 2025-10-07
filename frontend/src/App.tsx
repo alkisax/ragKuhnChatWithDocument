@@ -49,7 +49,14 @@ const ChatContainer = () => {
     setQuery('')
 
     try {
-      const res = await axios.post<RagResponse>(`${backendUrl}/api/rag/ask`, { query })
+      // με αυτό το call δεν είχαμε μνήμη. κάθε pprompt ηταν απομονωμένο
+      // const res = await axios.post<RagResponse>(`${backendUrl}/api/rag/ask`, { query })
+
+      // στέλνω μαζί με το prompt και τις τελευταιες 4 ερωτήσεις και απαντήσεις
+      // θα χρειαστούν αλαγές και στο gptRagParagraph.controller.ts
+      // TODO αργότερα θα μπορούσα να στέλνω και ένα summirise όλων των προηγούμενων
+      const history = messages.slice(-4).map(m => ({ role: m.role, content: m.content }))
+      const res = await axios.post<RagResponse>(`${backendUrl}/api/rag/ask`, { query, history })
       const { answer, context } = res.data
       const assistantMsg: Message = {
         id: uuidv4(),

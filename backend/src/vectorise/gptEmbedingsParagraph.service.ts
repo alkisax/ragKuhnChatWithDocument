@@ -87,8 +87,17 @@ export const semanticSearchParagraphs = async (query: string, topN = 5) => {
     { paragraphNo: 1, text: 1, vectors: 1 }
   ).lean<ParagraphType[]>()
 
+  // remove junk before scoring
+  // μας έβγαζε λάθος προτάσεις γιατί το Parse δεν είχε γίνει καλά. Όπως "The Structure of Scientific Revolutions" "The Nature and Necessity of Scientific Revolutions" "Revolutions in science, 6-8, 92-98, 101-2" που ήταν τίτλοι σελιδών υποσημειώσεις κλπ. Για αυτό πριν στήλουμε τις παραγράφους για σύγγριση περνάμε ένα ακόμα φίλτρο
+  const cleanParagraphs = paragraphs.filter(p =>
+    p.text.length > 50 &&  //κόβει πολύ μικρά αποσπάσματα
+    !/^\d+(\s|$)/.test(p.text) && // /^\d+(\s|$)/. ^ αρχή string → μετά \d+ ένα ή περισσότερα ψηφία → μετά (\s|$) είτε κενό είτε τέλος γραμμής. Πιάνει πράγματα τύπου '10', '42 ' κ.λπ. (π.χ. αριθμούς σελίδων στην αρχή).
+    !/^(contents|index|references)/i.test(p.text) &&
+    !/^(the\sstructure|the\sname|revolutions\s?in\s?science)/i.test(p.text)
+  )
+
   // αυτό που θα μου επιστραφεί τελικά θα είναι ένα json obj με { paragraphNo, text, score }
-  const ranked = paragraphs
+  const ranked = cleanParagraphs
     .map(p => ({
       paragraphNo: p.paragraphNo,
       text: p.text,

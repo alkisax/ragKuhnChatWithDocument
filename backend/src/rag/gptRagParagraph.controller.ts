@@ -14,11 +14,16 @@ dotenv.config() // αυτό μάλλον δεν χρειάζετε μιας κα
 
 const askWithContext = async (req: Request, res: Response) => {
   try {
-    // η ερώτηση string απο το front
-    const { query } = req.body
+    // η ερώτηση string απο το front // προστέθηκε να έρχετε και ένα μικρό ιστορικό των τελευταίων 4 ερωτοαπαντήσεων για να αποκτήσει λίγη μνήμη
+    const { query, history } = req.body 
     if (!query || typeof query !== 'string') {
       return res.status(400).json({ status: false, message: 'Missing query text' })
     }
+
+    // διαμόρφωση του ιστορικού
+    const chatHistory = Array.isArray(history)
+      ? history.map(h => `${h.role === 'user' ? 'User' : 'Assistant'}: ${h.content}`).join('\n')
+      : ''
 
     const apiKey = process.env.OPENAI_API_KEY
     if (!apiKey) {
@@ -39,6 +44,9 @@ const askWithContext = async (req: Request, res: Response) => {
     const prompt = `
       You are a philosophy of science assistant specializing in Thomas Kuhn's *The Structure of Scientific Revolutions*.
 
+      Recent conversation:
+      ${chatHistory}
+
       Use the following excerpts as factual context to answer the user's question.
       Stay faithful to Kuhn’s terminology (paradigm, normal science, anomalies, crisis, revolution).
       Do not add external commentary or modern reinterpretations — base your answer strictly on the provided text.
@@ -51,6 +59,8 @@ const askWithContext = async (req: Request, res: Response) => {
 
       Answer:
     `.trim()
+
+    // console.log(prompt)
 
     // 4️⃣ call OpenAI
     const gptAnswer = await getGPTResponse(prompt, apiKey)
