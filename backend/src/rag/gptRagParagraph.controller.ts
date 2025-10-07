@@ -1,0 +1,71 @@
+/*
+  1️⃣1️⃣ μου δημιουργεί το prompt με το context και καλεί την συνδεση με το openAI
+
+  prev → backend\src\rag\gptRag.service.ts
+  next → backend\src\rag\gptRagParagraph.routes.ts και μετά frontend
+*/
+
+import type { Request, Response } from 'express'
+import dotenv from 'dotenv'
+import { semanticSearchParagraphs } from '../vectorise/gptEmbedingsParagraph.service'
+import { getGPTResponse } from './gptRag.service'
+
+dotenv.config() // αυτό μάλλον δεν χρειάζετε μιας και δεν είναι standalone script αλλα κανονικός controller
+
+const askWithContext = async (req: Request, res: Response) => {
+  try {
+    // η ερώτηση string απο το front
+    const { query } = req.body
+    if (!query || typeof query !== 'string') {
+      return res.status(400).json({ status: false, message: 'Missing query text' })
+    }
+
+    const apiKey = process.env.OPENAI_API_KEY
+    if (!apiKey) {
+      return res.status(500).json({ status: false, message: 'OPENAI_API_KEY not set' })
+    }
+
+    // 1️⃣ retrieve top 5 similar paragraphs
+    const topParagraphs = await semanticSearchParagraphs(query, 5)
+
+    // 2️⃣ build context string
+    const context = topParagraphs
+      .map(
+        (p: { paragraphNo: number; text: string }, i: number) => `Excerpt ${i + 1} (Paragraph ${p.paragraphNo}):\n${p.text.trim()}`
+      )
+      .join('\n\n')
+
+    // 3️⃣ construct full prompt
+    const prompt = `
+      You are a historian assistant analyzing quotations from Mao Zedong.
+
+      Use the following excerpts as factual context to answer the user’s question.
+      Keep your tone informative, concise, and avoid adding external knowledge.
+
+      Context:
+      ${context}
+
+      Question:
+      ${query}
+
+      Answer:
+    `.trim()
+
+    // 4️⃣ call OpenAI
+    const gptAnswer = await getGPTResponse(prompt, apiKey)
+
+    return res.json({
+      status: true,
+      question: query,
+      answer: gptAnswer,
+      context: topParagraphs
+    })
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : 'Unknown error'
+    return res.status(500).json({ status: false, message: msg })
+  }
+}
+
+export const gptRagParagraphController = {
+  askWithContext
+}

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "types": ["node", "jest"],
+    "target": "ES2020",
+    "module": "CommonJS",
+    "rootDir": ".",
+    "outDir": "./build",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictBindCallApply": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "sourceMap": true,
+    "useUnknownInCatchVariables": true
+  },
+  "include": ["./**/*"]
+}
