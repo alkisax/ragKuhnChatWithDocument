@@ -12,6 +12,9 @@
 **KuhnGPT** lets you have a conversation with Thomas Kuhn’s *The Structure of Scientific Revolutions* using a custom Retrieval-Augmented Generation pipeline.  
 The system indexes every paragraph of the book, vectorizes it using OpenAI embeddings, and allows the user to query and receive grounded answers with cited excerpts.
 
+- live app: https://ragkuhnchatwithdocument.onrender.com
+- github repo: https://github.com/alkisax/ragKuhnChatWithDocument
+
 This project is an educational and portfolio demonstration of a **complete MERN + AI stack** application combining:
 
 - 🧩 **MongoDB** – paragraph storage and embeddings  
