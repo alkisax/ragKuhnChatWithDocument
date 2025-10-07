@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["node", "jest"],
+    "types": ["node"],
     "target": "ES2020",
     "module": "CommonJS",
     "rootDir": ".",
@@ -17,6 +17,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "sourceMap": true,
+    "skipLibCheck": true, 
     "useUnknownInCatchVariables": true
   },
   "include": ["./**/*"]
