@@ -13,8 +13,8 @@ import path from 'path'
 import pdf from 'pdf-parse'
 
 // το file path του αρχείου pdf και του υπο δημιουργεία txt. Σε περίπτωση άλλου βιβλιου θα πρέπει να αλαχθει TODO → modular env
-const inputPath = path.resolve(__dirname, '../../uploads/Quotations_from_Chairman_Mao_Tse-tung.pdf')
-const outputPath = path.resolve(__dirname, '../../uploads/Quotations_from_Chairman_Mao_Tse-tung.txt')
+const inputPath = path.resolve(__dirname, '../../uploads/Kuhn-StructureOfScientificRevolutions.pdf')
+const outputPath = path.resolve(__dirname, '../../uploads/Kuhn-StructureOfScientificRevolutions.txt')
 
 // κανένα input ή outpout είναι ένα standalone cli script
 async function convertPdfToTxt(): Promise<void> {

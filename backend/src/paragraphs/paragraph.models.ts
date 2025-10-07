@@ -5,7 +5,7 @@
   ένα βασικό schema για να σώζωνται οι παράγραφοι μου στην mongo
 
   prev → backend\src\pdfToTxt\detectParagraph.ts
-  next → backend\src\paragraphs\paragraph.models.ts
+  next → backend\src\paragraphs\paragraph.dao.ts
 */
 
 import mongoose from 'mongoose'

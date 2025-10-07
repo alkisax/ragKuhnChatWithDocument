@@ -66,7 +66,7 @@ const MessageBubble = ({ message }: Props) => {
             >
               {message.context.map((p, i) => (
                 <Typography key={i} variant='body2' sx={{ mb: 1, color: '#ccc' }}>
-                  <b style={{ color: '#ffcc00' }}>Page {p.page}</b>: {p.text}
+                  <b style={{ color: '#ffcc00' }}>Paragraph  {p.paragraphNoTotal }</b>: {p.text}
                 </Typography>
               ))}
             </AccordionDetails>

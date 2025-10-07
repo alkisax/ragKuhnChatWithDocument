@@ -5,6 +5,19 @@
   prev → backend\src\paragraphs\paragraph.dao.ts
   next → backend\src\vectorise\gptEmbedingsParagraph.service.ts
 */
+
+/*
+ after run got:
+    Administrator@WINDOWS-4ABEJ0B MINGW64 /d/coding/tractatus/backend (main)  
+    $ npm run feed:kuhn
+    > rag-backend@1.0.0 feed:kuhn
+    > ts-node src/paragraphs/paragraphMongoFeeder.script.ts
+    [dotenv@17.2.3] injecting env (13) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+    ✅ Connected to MongoDB
+    ✅ Inserted 1050 paragraphs
+    🔌 MongoDB connection closed
+    Administrator@WINDOWS-4ABEJ0B MINGW64 /d/coding/tractatus/backend (main)  
+*/
 import mongoose from 'mongoose'
 // filesystem
 import fs from 'fs'
@@ -17,7 +30,7 @@ import type { ParagraphType } from './paragraph.types'
 dotenv.config() // αυτο μάλλον είναι περιτό μιας και το κάνουμε και στην app αλλά ας το αφήσω
 
 const MONGODB_URI = process.env.MONGODB_URI as string
-const txtPath = path.resolve(__dirname, '../../uploads/Quotations_from_Chairman_Mao_Tse-tung.txt') // το file path του αρχείου σε περίπτωση άλλου βιβλιου θα πρέπει να αλαχθει TODO → modular env
+const txtPath = path.resolve(__dirname, '../../uploads/Kuhn-StructureOfScientificRevolutions_CLEAN.txt') // το file path του αρχείου σε περίπτωση άλλου βιβλιου θα πρέπει να αλαχθει TODO → modular env
 
 // ούτε Input ούτε outpout είναι ένα σκριπτ που διαχωρίζει τις παραγράφους απο το txt αρχείο και τις μετατρέπει σε mongo documents χρησιμοποιόντας τα dao που έχουμε φτιάξει
 // αν αργότερα ανεβάζαμε το αρχείο μέσο multer αυτή η συνάρτηση θα έπρεπε να μετατραπεί σε controller

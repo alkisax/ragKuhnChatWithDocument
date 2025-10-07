@@ -12,7 +12,7 @@ import path from 'path'
 
 // το file path του αρχείου pdf και του υπο δημιουργεία txt. Σε περίπτωση άλλου βιβλιου θα πρέπει να αλαχθει TODO → modular env
 // Go two levels up from src/pdfToTxt to reach backend/uploads
-const filePath = path.resolve(__dirname, '../../uploads/Quotations_from_Chairman_Mao_Tse-tung.txt')
+const filePath = path.resolve(__dirname, '../../uploads/Kuhn-StructureOfScientificRevolutions_CLEAN.txt')
 
 const txt = fs.readFileSync(filePath, 'utf-8')
 

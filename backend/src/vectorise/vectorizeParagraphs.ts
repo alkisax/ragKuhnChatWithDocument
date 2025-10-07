@@ -81,7 +81,21 @@ async function vectorizeAllParagraphs(): Promise<void> {
         continue
       }
 
-      const vector = await getEmbedding(p.text)
+      let cleanText = p.text
+        .replace(/\r/g, '')              // remove carriage returns
+        .replace(/-\n/g, '')             // fix hyphenated line breaks
+        .replace(/\n+/g, ' ')            // flatten newlines
+        .replace(/[^\S\r\n]+/g, ' ')     // normalize spaces
+        .trim();
+
+      if (!cleanText) {
+        console.warn(`⚠️ Empty after cleaning paragraph ${p.paragraphNo}, skipping...`);
+        progress.completedIds.push(String(p._id));
+        saveProgress(progress);
+        continue;
+      }
+
+      const vector = await getEmbedding(cleanText) // sends ONE paragraph to OpenAI
       await Paragraph.findByIdAndUpdate(p._id, { vectors: vector }) // προσθέτει το vector
 
       progress.completedIds.push(String(p._id))

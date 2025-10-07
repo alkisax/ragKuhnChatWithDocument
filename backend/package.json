@@ -4,6 +4,10 @@
   "description": "backend for experimenting with rag",
   "main": "index.js",
   "scripts": {
+    "detect:kuhn": "ts-node src/pdfToTxt/detectParagraph.ts",
+    "feed:kuhn": "ts-node src/paragraphs/paragraphMongoFeeder.script.ts",
+    "vectorize:kuhn": "ts-node src/vectorise/vectorizeParagraphs.ts",
+    
     "build": "tsc && mkdir -p build/public && cp -r ../frontend/dist/* build/public/",
     "copy-assets": "copyfiles src/**/*.yml build/",
     "dev": "ts-node-dev src/server.ts",

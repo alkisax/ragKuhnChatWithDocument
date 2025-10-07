@@ -37,10 +37,11 @@ const askWithContext = async (req: Request, res: Response) => {
 
     // 3️⃣ construct full prompt
     const prompt = `
-      You are a historian assistant analyzing quotations from Mao Zedong.
+      You are a philosophy of science assistant specializing in Thomas Kuhn's *The Structure of Scientific Revolutions*.
 
-      Use the following excerpts as factual context to answer the user’s question.
-      Keep your tone informative, concise, and avoid adding external knowledge.
+      Use the following excerpts as factual context to answer the user's question.
+      Stay faithful to Kuhn’s terminology (paradigm, normal science, anomalies, crisis, revolution).
+      Do not add external commentary or modern reinterpretations — base your answer strictly on the provided text.
 
       Context:
       ${context}

@@ -1,6 +1,6 @@
 /*
   σχόλια για όλο το front:
-  εχουμε 3 βασικά components:
+  εχουμε 2 βασικά components:
     chat cntainer: η handleAsk κάνει axios.post<RagResponse>(`${backendUrl}/api/rag/ask`, { query })
     και κάνει render το background το βασικό κουτι και το κουτί διαλόγου
     MessageBubble: μου κάνει render τα στοιχεία του διαλόγου (και το expandable με τις πηγές)
@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from 'uuid'
 import MessageBubble from './components/MessageBubble'
 import { VariablesProvider, useVariables } from './context/VariablesContext'
 import type { Message, RagResponse } from './types/rag.types'
-import maoGPT from './assets/maoGPT.png'
+import copernicusRobot from './assets/copernicusRobot.png'
 
 // 🌙 Define dark theme
 const darkTheme = createTheme({
@@ -80,8 +80,8 @@ const ChatContainer = () => {
       {/* Logo + Title */}
       <Box sx={{ textAlign: 'center', mb: 4 }}>
         <img
-          src={maoGPT}
-          alt="maoGPT"
+          src={copernicusRobot}
+          alt="kuhnGPT"
           style={{
             width: '180px',
             borderRadius: '12px',
@@ -96,7 +96,7 @@ const ChatContainer = () => {
             letterSpacing: 2,
           }}
         >
-          maoGPT
+          kuhnGPT
         </Typography>
       </Box>
 
@@ -122,7 +122,7 @@ const ChatContainer = () => {
         <Box sx={{ display: 'flex', gap: 1 }}>
           <TextField
             fullWidth
-            label="Ask something..."
+            label="Ask about Kuhn's Structure of scientific revolutions..."
             variant="filled"
             value={query}
             onChange={e => setQuery(e.target.value)}

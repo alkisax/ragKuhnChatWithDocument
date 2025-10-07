@@ -1,6 +1,6 @@
 /*
   4️⃣
-  prev → backend\src\pdfToTxt\detectParagraph.ts 
+  prev → backend\src\paragraphs\paragraph.models.ts 
   next → backend\src\paragraphs\paragraphMongoFeeder.script.ts
 */
 
