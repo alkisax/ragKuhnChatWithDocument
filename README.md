@@ -34,26 +34,6 @@ This project is an educational and portfolio demonstration of a **complete MERN 
 
 ---
 
-## 🧩 Architecture
-
-```
-frontend/
- ├── src/
- │   ├── App.tsx               # main chat container
- │   ├── components/MessageBubble.tsx
- │   ├── context/VariablesContext.tsx
- │   └── types/rag.types.ts
-backend/
- ├── src/
- │   ├── app.ts                # express app, routes
- │   ├── server.ts             # connects to Mongo
- │   ├── paragraphs/           # model + feeder scripts
- │   ├── vectorise/            # embeddings + cosine search
- │   ├── rag/                  # RAG controller + GPT service
- │   └── pdfToTxt/             # optional preprocessing
- └── uploads/                  # book .txt files
-```
-
 **Flow of data**
 
 1. 🧾 `Kuhn-StructureOfScientificRevolutions_CLEAN.txt`  
@@ -67,14 +47,14 @@ backend/
 
 ## ⚙️ Tech Stack
 
-| Layer | Technologies |
-|-------|---------------|
-| **Frontend** | React (Vite) · TypeScript · MUI · Axios |
-| **Backend** | Node.js · Express · TypeScript |
-| **Database** | MongoDB Atlas (Mongoose ORM) |
-| **AI / NLP** | OpenAI API (`text-embedding-3-small`, `gpt-3.5-turbo`) |
-| **Utilities** | dotenv · axios · uuid · ts-node-dev |
-| **Deployment** | Render (backend) + Vercel (frontend) |
+| Layer          | Technologies                                           |
+|----------------|--------------------------------------------------------|
+| **Frontend**   | React (Vite) · TypeScript · MUI · Axios                |
+| **Backend**    | Node.js · Express · TypeScript                         |
+| **Database**   | MongoDB Atlas (Mongoose ORM)                           |
+| **AI / NLP**   | OpenAI API (`text-embedding-3-small`, `gpt-3.5-turbo`) |
+| **Utilities**  | dotenv · axios · uuid · ts-node-dev                    |
+| **Deployment** | Render (backend) + Vercel (frontend)                   |
 
 ---
 
@@ -95,32 +75,6 @@ OPENAI_API_KEY=your_openai_key
 BACK_END_PORT=3001
 ```
 
-### 3️⃣ Run locally
-```bash
-# backend
-cd backend
-npm run dev
-
-# frontend
-cd ../frontend
-npm run dev
-```
-Visit **http://localhost:5173**
-
----
-
-## 🧠 Example Query
-
-> **Q:** What is the order of events in a scientific revolution?  
->
-> **A (KuhnGPT):**  
-> The order of events involves the community’s rejection of an old paradigm in favor of a new one, leading to new problems, new standards of evaluation, and a transformed scientific imagination.  
->
-> **Context excerpts:**  
-> - *Each produced a consequent shift in the problems available for scientific scrutiny...*  
-> - *Such changes, together with the controversies that accompany them, are the defining characteristics of scientific revolutions.*
-
----
 
 ## 🛠️ Scripts
 
@@ -136,17 +90,7 @@ Visit **http://localhost:5173**
 ## 🧑‍💻 Author
 
 **Pelopidas Kopakakis**  
-Full-Stack Developer · AI Enthusiast  
 - GitHub: [alkisax](https://github.com/alkisax)  
 - LinkedIn: [Pelopidas Kopakakis](https://www.linkedin.com/in/pelopidas-kopakakis/)  
 - Email: pelopidas.kopakakis@gmail.com  
 
----
-
-## 🧾 License
-MIT License — for educational and portfolio use.
-
----
-
-### ⭐ If you enjoyed this project
-Give it a ⭐ on GitHub or fork it to build your own RAG-based document chatbot.
